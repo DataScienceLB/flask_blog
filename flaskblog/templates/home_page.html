@@ -1,0 +1,27 @@
+{% extends "base_template.html" %}
+
+{% block title %} Home Page {% endblock %}
+
+{% block content %}
+    {% for post in posts %}
+        <div class="card text-center mb-4">
+            <div class="card-header bg-dark">
+                <img class="rounded-circle" src="{{ url_for("static", filename="profile_pics/" + post.author.image_file) }}">
+                <div class="article-metadata">
+                    <a class="mr-2" href="#">{{ post.author.username }}</a>
+                    <small class="text-muted">{{ post.date_posted.strftime("%Y-%m-%d") }}</small>
+                </div>
+            </div>
+            <div class="card-body">
+                <h4>{{ post.title }}</h4>
+                <p class="card-text">{{ post.content }}</p>
+                <a class="text-white btn btn-primary btn-lg" href="{{ url_for("view_post", post_id=post.id) }}">Read More</a>
+            </div>
+            <div class="card-footer text-muted bg-dark text-light">
+                2 Days Ago
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}
+
+{% block main %}{% endblock main%}
